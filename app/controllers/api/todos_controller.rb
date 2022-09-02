@@ -23,7 +23,7 @@ class TodosController < ApplicationController
         private 
     
         def todo_params
-            params.require(:todo).permit(:name, :user_id)
+            params.require(:todo).permit(:description, :user_id)
         end
     
         def authorize
