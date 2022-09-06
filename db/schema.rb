@@ -10,9 +10,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_01_231602) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_06_192614) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "clients", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "employees", force: :cascade do |t|
+    t.string "name"
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "projects", force: :cascade do |t|
+    t.string "name"
+    t.boolean "completed"
+    t.bigint "client_id", null: false
+    t.bigint "employee_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["client_id"], name: "index_projects_on_client_id"
+    t.index ["employee_id"], name: "index_projects_on_employee_id"
+  end
 
   create_table "todos", force: :cascade do |t|
     t.string "description"
@@ -33,5 +57,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_01_231602) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "projects", "clients"
+  add_foreign_key "projects", "employees"
   add_foreign_key "todos", "users"
 end
