@@ -1,6 +1,6 @@
 import './App.css';
 import React, { useEffect, useState } from 'react';
-import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+import {Route, Routes} from 'react-router-dom';
 import NavBar from './components/NavBar';
 import SignUpForm from './components/SignUpForm';
 import LoginForm from './components/LoginForm';
@@ -26,8 +26,6 @@ function App() {
   const [showFormClient, setShowFormClient] = useState(false);
   const [showFormEmployee, setShowFormEmployee] = useState(false);
 
-
-//auto login if user is logged in
   useEffect(() => {
     document.title = 'Project Tracker';
     fetch("/api/me").then((r) => {
@@ -37,7 +35,6 @@ function App() {
     });
   }, []);
 
-// fetching clients, employees, and projects
   useEffect(()=>{    
     fetch('/api/employees')    
     .then(r => r.json())
@@ -55,7 +52,7 @@ function App() {
   }, [user, projects]) 
 
   useEffect(()=>{    
-     fetch('/api/projects')
+    fetch('/api/projects')
     .then(r => r.json())
     .then(data => {
       setProjects(data)})
@@ -63,29 +60,28 @@ function App() {
   }, [user])
 
   const deleteProject = (id) => {
-    const newlist = projects.filter(project => project.id !== id)
-    setProjects(newlist)
+    const newList = projects.filter(project => project.id !== id)
+    setProjects(newList)
   }
 
   const updateProject = (updatedProject) => {
-    const newlist = projects.map(project => project.id === updatedProject.id ? updatedProject : project)
-    setProjects(newlist)
-
+    const newList = projects.map(project => project.id === updatedProject.id ? updatedProject : project)
+    setProjects(newList)
   }
 
   const addProject = (newProject) => {    
-    const newlist = [...projects, newProject]
-    setProjects(newlist)
+    const newList = [...projects, newProject]
+    setProjects(newList)
   }
 
   const addClient = (newClient) => {    
-    const newlist = [...clients, newClient]
-    setClients(newlist)
+    const newList = [...clients, newClient]
+    setClients(newList)
   }
 
   const deleteClient = (id) => {
-    const newlist = clients.filter(client => client.id !== id)
-    setClients(newlist)
+    const newList = clients.filter(client => client.id !== id)
+    setClients(newList)
   }
 
   const addEmployee = (newEmployee) => {
@@ -97,8 +93,6 @@ function App() {
     const newList = employees.filter(employee => employee.id !== id)
     setEmployees(newList)
   }
-
-  // if (!user) return <LoginForm onLogin={setUser}/>
 
   return (
     <div className="App">      

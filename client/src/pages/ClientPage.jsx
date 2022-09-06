@@ -2,21 +2,14 @@ import React, {useEffect, useState} from 'react'
 import { useParams } from 'react-router';
 import {useNavigate} from 'react-router-dom'
 
-const ClientPage = ({user}) => {
+const ClientPage = ({user, clients}) => {
   const {id} = useParams();
   const navigate = useNavigate()
   const [client, setClient] = useState(null)
-    
+  
   useEffect(() => {
-    fetch(`/api/clients/${id}`)
-    .then(res =>{
-      if (res.ok) {
-        res.json().then(data=>setClient(data))
-      }else{
-        res.json().then(data=>console.log(data.errors))
-      }
-    })
-  }, [id])
+    setClient(clients.find(client => client.id === parseInt(id)))
+  }, [id, clients])
 
   if (!user){
     navigate('/login')

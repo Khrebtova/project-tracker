@@ -6,7 +6,7 @@ const ClientList = ({clients, onDeleteClient, user}) => {
   const [search, setSearch] = useState('')
   const navigate = useNavigate()
   let clientList = clients.filter(client => client.name.toLowerCase().includes(search))  
-  const renderClients = clientList.map(client => <Client client={client} onDeleteClient={onDeleteClient} key={client.id} user={user}/>)
+  const renderClients = clientList.map(client => <Client client={client} onDeleteClient={onDeleteClient} key={client.id}/>)
 
   if (!user){
     navigate('/login')

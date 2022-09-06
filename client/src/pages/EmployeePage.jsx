@@ -2,21 +2,14 @@ import React, {useEffect, useState} from 'react'
 import { useParams } from 'react-router';
 import {useNavigate} from 'react-router-dom'
 
-const EmployeePage = ({user}) => {
+const EmployeePage = ({user, employees}) => {
   const {id} = useParams();
   const navigate = useNavigate()
   const [employee, setEmployee] = useState(null)
 
   useEffect(() => {
-    fetch(`/api/employees/${id}`)
-    .then(res =>{
-      if (res.ok) {
-    res.json().then(data=>setEmployee(data))
-    }else{
-      res.json().then(data=>console.log(data.errors))
-    }
-  })
-  }, [id])
+    setEmployee(employees.find(employee => employee.id === parseInt(id)))
+  }, [id, employees])
 
   if (!user){
     navigate('/login')
