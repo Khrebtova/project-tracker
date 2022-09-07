@@ -9,17 +9,20 @@ const Project = ({project, clients, employees, onDeleteProject, onUpdateProject}
   const [errors, setErrors] = useState([])
   
   const handleDelete = () => {
-    fetch(`/projects/${project.id}`, { method: 'DELETE' })
+    fetch(`/api/projects/${project.id}`, { method: 'DELETE' })
     .then((res)=> {if (res.ok){
       onDeleteProject(project.id)
+    }else{
+      res.json().then(err => setErrors([...errors, err.errors]))
     }})
   }
 
   const dropDownClients = () => {
     return clients.map(client => <option key={client.id} value={client.id}>{client.name}</option>)
   }
+  
   const dropDownEmployees = () => {
-      return employees.map(employee => <option key={employee.id} value={employee.id}>{employee.name}, {employee.title}</option>)
+    return employees.map(employee => <option key={employee.id} value={employee.id}>{employee.name}, {employee.title}</option>)
   }
   
   const handleSubmit = (e) => {
@@ -36,52 +39,49 @@ const Project = ({project, clients, employees, onDeleteProject, onUpdateProject}
       body: JSON.stringify(updatedProject)
     })
     .then(res => {
-            if(res.ok) {
-                res.json().then(data => {
-                    onUpdateProject(data)
-                    setIsEditing(false)                    
-                })
-            } else {
-                res.json().then(data => setErrors(data.errors))
-            }
+      if(res.ok) {
+        res.json().then(data => {
+          onUpdateProject(data)
+          setIsEditing(false)                    
+        })
+      } else {
+        res.json().then(data => setErrors(data.errors))
+      }
     })
-    .catch(err => console.log(err)) 
   }
 
   const editProject = () => {
     return(      
       <form onSubmit={handleSubmit}>
         <input 
-            type="text" 
-            id="projectname"
-            autoComplete="off"
-            value = {name}
-            placeholder = "Project name"
-            onChange = {(e) => setName(e.target.value)}
-            style={{width: '200px', margin: '5px'}}
+          type="text" 
+          id="projectname"
+          autoComplete="off"
+          value = {name}
+          placeholder = "Project name"
+          onChange = {(e) => setName(e.target.value)}
+          style={{width: '200px', margin: '5px'}}
         />        
         <select  
         value={clientId} 
         onChange={(e) => setClientId(e.target.value)}
         style={{width: '200px', margin: '5px'}}
         >
-            <option value="">Select a client</option>
-            {dropDownClients()}
+          <option value="">Select a client</option>
+          {dropDownClients()}
         </select>        
         <select 
         value={employeeId} 
         onChange={(e) => setEmployeeId(e.target.value)}
         style={{width: '200px', margin: '5px'}}
         >
-            <option value="">Select a employee</option>
-            {dropDownEmployees()}
+          <option value="">Select a employee</option>
+          {dropDownEmployees()}
         </select>
         <label htmlFor='completed'>Completed</label>
-        <input id='completed' type={'checkbox'} checked={completed} onChange={(e) => setCompleted(e.target.checked)}/>
-        {errors? errors.map(error => <p key={error}>{error}</p>) : null}
-        <button type="submit" style={{width: '200px', margin: '5px'}}>Save</button>
-    </form>
-    
+        <input id='completed' type={'checkbox'} checked={completed} onChange={(e) => setCompleted(e.target.checked)}/>        
+        <button type="submit" style={{width: '200px', margin: '5px'}}>Update</button>
+      </form>    
     )
   }
 
@@ -91,7 +91,7 @@ const Project = ({project, clients, employees, onDeleteProject, onUpdateProject}
         <div style={{backgroundColor: '#6a80adb0', fontSize: '20px'}}>
           {project.name.toUpperCase()}
         </div>        
-        {project.completed ? <p style={{backgroundColor: 'white', color: "green", fontStyle: 'oblique'}}>COMPLETED!</p> : <p style={{backgroundColor: 'white',color: "red", fontStyle: 'oblique'}}>IN PROGRESS</p>}
+        {project.completed ? <p className='completed'>COMPLETED!</p> : <p className='in-progress'>IN PROGRESS</p>}
         <div >
           Client: {project.client.name}
         </div>
@@ -109,6 +109,7 @@ const Project = ({project, clients, employees, onDeleteProject, onUpdateProject}
   return (
     <div className="projectCard">
       {isEditing ? editProject() : showProject()}
+      {errors? errors.map(error => <p key={error} className='error'>{error}</p>) : null}
     </div>
   )
 }

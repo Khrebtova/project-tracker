@@ -1,8 +1,6 @@
 .App {
-  text-align: center;
-  
+  text-align: center;  
 }
-
 
 .App-logo {
   margin-left: 20px;
@@ -150,4 +148,18 @@
   align-items: center;  
 }
 
+.error {
+  color: red;
+}
 
+.completed {
+  background-color: white;
+  color: green;
+  font-style: oblique;
+}
+
+.in-progress{
+  background-color: white;
+  color: red;
+  font-style: oblique;
+}

@@ -18,12 +18,12 @@ class Api::ClientsController < ApplicationController
 
     # GET /clients/1
     def show        
-            client = find_client
-            if client 
-                render json: client, status: :ok
-            else
-                render json: {errors: ["Client not found"]}, status: :not_found
-            end 
+        client = find_client
+        if client 
+            render json: client, status: :ok
+        else
+            render json: {errors: ["Client not found"]}, status: :not_found
+        end 
     end
 
     # DELETE /clients/1

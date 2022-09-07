@@ -25,7 +25,8 @@ function App() {
   const [showForm, setShowForm] = useState(false);
   const [showFormClient, setShowFormClient] = useState(false);
   const [showFormEmployee, setShowFormEmployee] = useState(false);
-
+  const [errors, setErrors] = useState([]);
+  
   useEffect(() => {
     document.title = 'Project Tracker';
     fetch("/api/me").then((r) => {
@@ -41,23 +42,23 @@ function App() {
     .then(data => {      
       setEmployees(data)
       })
-    .catch(err => console.log(err))
+    .catch(err => setErrors([...errors, err]))
 
     fetch('/api/clients')
     .then(r => r.json())
     .then(data => {
       setClients(data)
       })
-    .catch(err => console.log(err))  
-  }, [user, projects]) 
+    .catch(err => setErrors([...errors, err]))  
+  }, [user, projects, errors]) 
 
   useEffect(()=>{    
     fetch('/api/projects')
     .then(r => r.json())
     .then(data => {
       setProjects(data)})
-    .catch(err => console.log(err))
-  }, [user])
+    .catch(err => setErrors([...errors, err]))
+  }, [user, errors])
 
   const deleteProject = (id) => {
     const newList = projects.filter(project => project.id !== id)
@@ -101,6 +102,7 @@ function App() {
       {showFormEmployee? <NewEmployeeForm onSetShowFormEmployee={setShowFormEmployee} onAddEmployee={addEmployee}/> : null }  
       {showForm ? <NewProjectForm setShowForm = {setShowForm} clients={clients} employees={employees} onAddProject={addProject}/> : null}      
       {user ? <ShowFormButtons onSetShowForm={setShowForm} onSetShowFormClient={setShowFormClient} onSetShowFormEmployee={setShowFormEmployee}/> : null}
+      {errors? errors.map(error => <p className='error' key={error}>{error}</p>) : null}
       <Routes>
         <Route path="/login" element={<LoginForm onLogin={setUser} user={user}/>} />
         <Route path="/signup" element={<SignUpForm onLogin={setUser} user={user}/>} />

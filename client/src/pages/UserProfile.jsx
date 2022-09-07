@@ -5,10 +5,10 @@ import Todo from '../components/Todo'
 const UserProfile = ({user}) => {
     const [newTodo, setNewToDo] = useState('')    
     const [todos, setTodos] = useState(user.todos)
-    
+    const [errors, setErrors] = useState([])
+
     const handleSubmit =(e)=>{
         e.preventDefault()
-        console.log(newTodo)
         fetch('/api/todos', {
             method: 'POST',
             headers: {'content-type': 'application/json'},
@@ -21,7 +21,7 @@ const UserProfile = ({user}) => {
             if (res.ok){
                 res.json().then(data=>setTodos([...todos, data]))
             }else{
-                res.json().then(data=>console.log(data.errors))
+                res.json().then(err=>setErrors([...errors, err.errors]))
             }
         })
         setNewToDo('')
@@ -41,6 +41,7 @@ const UserProfile = ({user}) => {
                 <input type="text" placeholder="Add a todo" onChange={(e)=>setNewToDo(e.target.value) } value={newTodo}/>
                 <button type="submit">Add</button>
             </form>
+            {errors ? errors.map(error => <p className='error'>{error}</p>): null}
         </div>
     )
 }
