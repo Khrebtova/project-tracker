@@ -26,7 +26,7 @@ function App() {
   const [showFormClient, setShowFormClient] = useState(false);
   const [showFormEmployee, setShowFormEmployee] = useState(false);
   const [errors, setErrors] = useState([]);
-  
+
   useEffect(() => {
     document.title = 'Project Tracker';
     fetch("/api/me").then((r) => {
@@ -112,7 +112,7 @@ function App() {
         <Route path="/clients/:id" element={<ClientPage clients={clients} user={user}/>} />
         <Route path="/employees/:id" element={<EmployeePage employees={employees} user={user}/>} />
         <Route path="/projects" element={<ProjectList projects={projects} onUpdateProject={updateProject} onDeleteProject={deleteProject} clients={clients} employees={employees} user={user}/>} />          
-        <Route path="/user" element={<UserProfile user={user}/>} />
+        <Route path="/profile" element={<UserProfile user={user}/>} />
         <Route path="/" element={<Home user={user} clients={clients} employees={employees} projects={projects}/>} />
       </Routes>      
     </div>

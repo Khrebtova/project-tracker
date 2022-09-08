@@ -18,8 +18,8 @@ const Logout = ({onLogout}) => {
   return (
     <div>
         <h2>Are you sure you want to log out? </h2>
-        <button style={{width: 'auto', height: '40px', fontSize: 'calc(20px)'}} onClick={handleLogout}>YES! Log out</button>
-        <button style={{width: 'auto', height: '40px', fontSize: 'calc(20px)'}} onClick={() => navigate('/')}>NO! Stay logged in</button>
+        <button className='submit-button' onClick={handleLogout}>YES! Log out</button>
+        <button className='submit-button' onClick={() => navigate('/')}>NO! Stay logged in</button>
     </div>
   )
 }

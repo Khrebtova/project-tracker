@@ -60,12 +60,12 @@ const Project = ({project, clients, employees, onDeleteProject, onUpdateProject}
           value = {name}
           placeholder = "Project name"
           onChange = {(e) => setName(e.target.value)}
-          style={{width: '200px', margin: '5px'}}
+          className='project-card-input'
         />        
         <select  
         value={clientId} 
         onChange={(e) => setClientId(e.target.value)}
-        style={{width: '200px', margin: '5px'}}
+        className='project-card-input'
         >
           <option value="">Select a client</option>
           {dropDownClients()}
@@ -73,25 +73,23 @@ const Project = ({project, clients, employees, onDeleteProject, onUpdateProject}
         <select 
         value={employeeId} 
         onChange={(e) => setEmployeeId(e.target.value)}
-        style={{width: '200px', margin: '5px'}}
+        className='project-card-input'
         >
           <option value="">Select a employee</option>
           {dropDownEmployees()}
         </select>
         <label htmlFor='completed'>Completed</label>
         <input id='completed' type={'checkbox'} checked={completed} onChange={(e) => setCompleted(e.target.checked)}/>        
-        <button type="submit" style={{width: '200px', margin: '5px'}}>Update</button>
+        <button type="submit" className='project-card-input'>Update</button>
       </form>    
     )
   }
 
   const showProject =()=>{
     return(
-      <div>
-        <div style={{backgroundColor: '#6a80adb0', fontSize: '20px'}}>
-          {project.name.toUpperCase()}
-        </div>        
-        {project.completed ? <p className='completed'>COMPLETED!</p> : <p className='in-progress'>IN PROGRESS</p>}
+      <>
+        <h3>{project.name.toUpperCase()}</h3>        
+        {project.completed ? <h4 className='completed'>COMPLETED</h4> : <h4 className='in-progress'>IN PROGRESS</h4>}
         <div >
           Client: {project.client.name}
         </div>
@@ -102,7 +100,7 @@ const Project = ({project, clients, employees, onDeleteProject, onUpdateProject}
           <button onClick={()=> {setIsEditing(!isEditing)}}>Edit</button>
           <button onClick={handleDelete}>Delete</button>
         </div>
-      </div>
+      </>
     )
   }
   

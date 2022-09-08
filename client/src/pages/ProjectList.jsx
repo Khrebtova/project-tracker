@@ -1,7 +1,7 @@
 import React from 'react'
 import Project from '../components/Project'
 
-const ProjectList = ({clients, employees, projects, onDeleteProject, onUpdateProject}) => {
+const ProjectList = ({clients, employees, projects, onDeleteProject, onUpdateProject, user}) => {
   const [filter, setFilter] = React.useState('all')
   
   let projectList;
@@ -10,10 +10,12 @@ const ProjectList = ({clients, employees, projects, onDeleteProject, onUpdatePro
   }else if (filter === 'completed') {
     projectList = projects.filter(project => project.completed === true);
   }else{
-    projectList = projects.filter(project => project.completed === false || project.completed === null)  ;  
+    projectList = projects.filter(project => project.completed === false)  ;  
   }
 
   const renderProjects = projectList.map(project => <Project key={project.id} project={project} clients={clients} employees={employees} onDeleteProject={onDeleteProject} onUpdateProject={onUpdateProject}/>)
+
+  if (!user) return <h3> <a href='/login'>Please login</a> </h3>
 
   return (
     <div >

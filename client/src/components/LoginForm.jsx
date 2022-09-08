@@ -34,7 +34,7 @@ const LoginForm = ({onLogin}) => {
                 <input type="text" id="username" placeholder="username"  autoComplete="off" value={username} onChange={(e) => setUsername(e.target.value)}/>
                 <input type="password" id="password" placeholder="password" autoComplete="off" value={password} onChange={(e) => setPassword(e.target.value)} />
                 <button type="submit">Login</button>
-                {errors? errors.map(error => <p style={{color: 'red'}} key={error}>{error}</p>) : null}
+                {errors? errors.map(error => <p className='error' key={error}>{error}</p>) : null}
             </form>
             <h3>Or create new account</h3>
             <button onClick={()=>navigate('/signup')}>Sign Up</button>

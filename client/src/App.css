@@ -1,9 +1,16 @@
 .App {
   text-align: center;  
+  /* font-family: monospace; */
+  font-family: 'Roboto', sans-serif;
 }
 
 .App-logo {
-  margin-left: 20px;
+  margin-left: 20px;  
+}
+
+.App-logo:hover {
+  text-decoration: underline;
+  color: black; 
 }
 
 .App-header {
@@ -18,6 +25,13 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
+
+.nav-link {
+  color: white;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
 .App-form {  
   background-color: #97a5c0;
   border: solid;
@@ -113,12 +127,18 @@
   border: solid;
   font-size: calc(15px);
   border-color: gray;
-  height: 180px;
+  height: auto;
   width: 250px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between;
   margin: 10px;
+}
+
+.project-card-input {
+  margin: 5px;   
+  width: 200px;
 }
 
 .clientCardContainer {
@@ -153,13 +173,16 @@
 }
 
 .completed {
-  background-color: white;
-  color: green;
+  background-color: rgb(146, 223, 151);
+  width: 100%;
+  
+  align-items: center;
   font-style: oblique;
 }
 
 .in-progress{
-  background-color: white;
-  color: red;
+  background-color: rgb(246, 202, 202);
+  width: 100%;
+  
   font-style: oblique;
 }

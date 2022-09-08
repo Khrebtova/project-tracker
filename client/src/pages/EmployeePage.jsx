@@ -11,9 +11,7 @@ const EmployeePage = ({user, employees}) => {
     setEmployee(employees.find(employee => employee.id === parseInt(id)))
   }, [id, employees])
 
-  if (!user){
-    navigate('/login')
-  }
+  if (!user) return <h3> <a href='/login'>Please login</a> </h3>
 
   if (!employee) {
     return <div>Loading...</div>

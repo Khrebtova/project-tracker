@@ -1,16 +1,12 @@
 import React, {useState} from 'react'
-import { useNavigate } from 'react-router-dom'
 import Employee from '../components/Employee'
 
 const EmployeeList = ({employees, onDeleteEmployee, user}) => {
   const [search, setSearch] = useState('')
-  const navigate = useNavigate()
   let employeeList = employees.filter(employee => employee.name.toLowerCase().includes(search) || employee.title.toLowerCase().includes(search))
   const renderEmployees = employeeList.map(employee => <Employee employee={employee} key={employee.id} onDeleteEmployee={onDeleteEmployee}/>)
   
-  if(!user){
-    navigate('/login')
-  }
+  if (!user) return <h3> <a href='/login'>Please login</a> </h3>
 
   return (
     <>

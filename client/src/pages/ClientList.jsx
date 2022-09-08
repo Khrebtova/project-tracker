@@ -1,16 +1,13 @@
 import React, {useState} from 'react'
-import {useNavigate} from 'react-router-dom'
 import Client from '../components/Client'
 
 const ClientList = ({clients, onDeleteClient, user}) => {
   const [search, setSearch] = useState('')
-  const navigate = useNavigate()
+  
   let clientList = clients.filter(client => client.name.toLowerCase().includes(search))  
   const renderClients = clientList.map(client => <Client client={client} onDeleteClient={onDeleteClient} key={client.id}/>)
 
-  if (!user){
-    navigate('/login')
-  }
+  if (!user) return <h3> <a href='/login'>Please login</a> </h3>
 
   return (
     <>

@@ -11,9 +11,7 @@ const ClientPage = ({user, clients}) => {
     setClient(clients.find(client => client.id === parseInt(id)))
   }, [id, clients])
 
-  if (!user){
-    navigate('/login')
-  }
+  if (!user) return <h3> <a href='/login'>Please login</a> </h3>
 
   if (!client) {
     return <div>Loading...</div>
