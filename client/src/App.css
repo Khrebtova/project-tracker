@@ -65,8 +65,7 @@
 
 .show-form-button {
   background-color: #97a5c0;
-  border-color: #97a5c0;
-  
+  border-color: #97a5c0;  
   color: white;
   font-size: calc(10px + 1vmin);
   min-height: 30px;  
@@ -169,7 +168,9 @@
 }
 
 .error {
-  color: red;
+  color: rgb(202, 50, 50);
+  text-decoration: underline;
+  font-size: calc(10px + 1vmin);
 }
 
 .completed {

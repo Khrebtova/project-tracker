@@ -8,8 +8,7 @@ const NewProjectForm = ({setShowForm, clients, employees, onAddProject}) => {
     const [clientId, setClientId] = useState('')
     const [employeeId, setEmployeeId] = useState('')
     const [errors, setErrors] = useState([])
-    // const [isLoading, setIsLoading] = useState(false)
-
+    
     const dropDownClients = () => {
         return clients.map(client => <option key={client.id} value={client.id}>{client.name}</option>)
     }
@@ -47,8 +46,9 @@ const NewProjectForm = ({setShowForm, clients, employees, onAddProject}) => {
     }
 
   return (
-    <div className='App-form'>
+      <div className='App-form'>
         <h3 className='App-logo'>New Project</h3>
+        {errors? errors.map(error => <p className="error" key={error}>{error}</p>) : null}
         <form className='App-form-input' onSubmit={handleSubmit}>
             <input 
                 type="text" 
@@ -68,7 +68,6 @@ const NewProjectForm = ({setShowForm, clients, employees, onAddProject}) => {
                 <option value="">Select a employee</option>
                 {dropDownEmployees()}
             </select>
-            {errors? errors.map(error => <p key={error}>{error}</p>) : null}
             <button className="submit-button" type="submit">Submit</button>
             <button className="cancel-button" onClick={() => setShowForm(false)}>X</button>
         </form>

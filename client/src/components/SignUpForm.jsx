@@ -112,7 +112,7 @@ const SignUpForm = ({onLogin}) => {
         <button type="submit">{isLoading ? "Loading..." : "Sign Up"}</button>     
         <h3>Or login to your account</h3>
         <button onClick={()=>navigate('/login')}>Login</button>
-        {errors ? errors.map((err) => (<p style={{color: 'red'}} key={err}>{err}</p>)) : null}
+        {errors ? errors.map((err) => (<p className='error' key={err}>{err}</p>)) : null}
       
     </form>
 

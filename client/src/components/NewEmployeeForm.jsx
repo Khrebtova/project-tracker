@@ -19,24 +19,25 @@ const NewEmployeeForm = ({onSetShowFormEmployee, onAddEmployee}) => {
             body: JSON.stringify(newEmployee)
         })
         .then(res => {
-                if(res.ok) {
-                    res.json().then(data => {
-                        onAddEmployee(data)
-                        onSetShowFormEmployee(false)
-                        navigate('/employees')
-                    })
+            if(res.ok) {
+                res.json().then(data => {
+                    onAddEmployee(data)
+                    onSetShowFormEmployee(false)
+                    navigate('/employees')
+                })
                 } else {
                     res.json().then(data => {
                         setErrors(data.errors)                        
                     })
                 }
-        })
-        .catch(err => console.log(err))        
-    }
+            })
+            .catch(err => console.log(err))        
+        }
 
-  return (
-    <div className='App-form'>
+    return (
+        <div className='App-form'>
         <h3 className='App-logo'>New employee</h3>
+        {errors? errors.map(error => <p className="error" key={error}>{error}</p>) : null}
         <form className='App-form-input' onSubmit={handleSubmit}>
             <input 
                 id='employeename'
@@ -53,9 +54,7 @@ const NewEmployeeForm = ({onSetShowFormEmployee, onAddEmployee}) => {
                 value = {title}
                 placeholder = "New employee title"
                 onChange = {(e) => setTitle(e.target.value)}
-            />
-                
-            {errors? errors.map(error => <p key={error}>{error}</p>) : null}
+            />                
             <button className="submit-button" type="submit">Submit</button>
             <button className="cancel-button" onClick={() => onSetShowFormEmployee(false)}>X</button>
         </form>

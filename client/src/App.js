@@ -98,9 +98,9 @@ function App() {
   return (
     <div className="App">      
       <NavBar user={user} /> 
-      {showFormClient ? <NewClientForm onSetShowFormClient={setShowFormClient} onAddClient={addClient}/> : null}
-      {showFormEmployee? <NewEmployeeForm onSetShowFormEmployee={setShowFormEmployee} onAddEmployee={addEmployee}/> : null }  
-      {showForm ? <NewProjectForm setShowForm = {setShowForm} clients={clients} employees={employees} onAddProject={addProject}/> : null}      
+      {showFormClient ? <NewClientForm onSetShowFormClient={setShowFormClient} onAddClient={addClient} /> : null}
+      {showFormEmployee? <NewEmployeeForm onSetShowFormEmployee={setShowFormEmployee} onAddEmployee={addEmployee} /> : null }  
+      {showForm ? <NewProjectForm setShowForm = {setShowForm} clients={clients} employees={employees} onAddProject={addProject} /> : null}      
       {user ? <ShowFormButtons onSetShowForm={setShowForm} onSetShowFormClient={setShowFormClient} onSetShowFormEmployee={setShowFormEmployee}/> : null}
       {errors? errors.map(error => <p className='error' key={error}>{error}</p>) : null}
       <Routes>

@@ -32,9 +32,10 @@ const NewClientForm = ({onSetShowFormClient, onAddClient}) => {
         .catch(err => console.log(err))        
     }
 
-  return (
-    <div className='App-form'>
+    return (
+        <div className='App-form'>
         <h3 className='App-logo'>New Client</h3>
+        {errors? errors.map(error => <p className='error' key={error}>{error}</p>) : null}        
         <form className='App-form-input' onSubmit={handleSubmit}>
             <input 
                 type="text" 
@@ -43,9 +44,7 @@ const NewClientForm = ({onSetShowFormClient, onAddClient}) => {
                 value = {name}
                 placeholder = "Client name"
                 onChange = {(e) => setName(e.target.value)}
-            />
-                
-            {errors? errors.map(error => <p key={error}>{error}</p>) : null}
+            />                
             <button className="submit-button" type="submit">Submit</button>
             <button className="cancel-button" onClick={() => onSetShowFormClient(false)}>X</button>
         </form>
