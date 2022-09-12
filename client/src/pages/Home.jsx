@@ -16,7 +16,7 @@ const Home = ({user, clients, employees, projects}) => {
       <h4 onClick={()=>navigate('/employees')}>{employees.length} employees</h4>
       <h4 onClick={()=>navigate('/clients')}>{clients.length} clients</h4>
       <h4 onClick={()=>navigate('/projects')}>{projects.length} projects</h4>
-      <h4 onClick={()=>navigate('/user')}>{user.todos.length} items in your todo list</h4>          
+      <h4 onClick={()=>navigate('/profile')}>{user.todos.length} items in your todo list</h4>          
     </div>
   )
 }
