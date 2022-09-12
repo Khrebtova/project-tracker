@@ -25,7 +25,7 @@ In the Project Tracker app user will be able to:
 
 ## Requirements
 
-- Ruby 2.7.4
+- Ruby 3.1.2
 - NodeJS (v16), and npm
 - Postgresql
 
@@ -44,4 +44,8 @@ You can use the following commands to run the application:
 
 ## Video walkthrough
 
-[https://youtu.be/FGiV7itvO40]
+https://youtu.be/FGiV7itvO40
+
+## See deployed application 
+
+https://project-tracker-2022.herokuapp.com/
